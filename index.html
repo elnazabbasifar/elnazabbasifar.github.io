@@ -7,31 +7,25 @@
 <style>
 /* Basic Reset */
 body, html { margin:0; padding:0; font-family: Arial,sans-serif; scroll-behavior: smooth; background:#f9fafb; color:#333; }
+a { text-decoration:none; color:#2563eb; }
+a:hover { text-decoration:underline; }
 
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  left:0;
-  top:0;
-  width:250px;
-  height:100%;
-  background:#f0f0f0;
-  padding:30px 20px;
-  box-shadow:2px 0 6px rgba(0,0,0,0.1);
-  overflow-y:auto;
-}
-.sidebar img { width:140px; height:140px; border-radius:50%; object-fit:cover; border:3px solid #ccc; margin-bottom:15px; }
-.sidebar h1 { font-size:1.8rem; margin:0 0 10px 0; }
-.sidebar p { font-size:0.95rem; line-height:1.4; margin:0.5rem 0; }
-.sidebar a { display:block; margin:5px 0; color:#2563eb; font-weight:bold; }
-.sidebar a:hover { text-decoration:underline; }
+/* Header - left aligned */
+header { background: linear-gradient(135deg, #4f46e5, #6366f1); color:white; text-align:left; padding:40px 60px; display:flex; align-items:center; gap:20px; }
+header img { width:140px; height:140px; border-radius:50%; object-fit:cover; border:4px solid white; box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+header div { max-width:600px; }
+header h1 { font-size:2.5rem; margin-bottom:0.3rem; }
+header p { font-size:1rem; line-height:1.4; margin-bottom:0.5rem; }
 
-/* Main content */
-.main-content { margin-left:270px; padding:40px 30px; }
+/* Nav */
+nav { position:sticky; top:0; background:white; box-shadow:0 2px 6px rgba(0,0,0,0.1); z-index:20; }
+nav ul { display:flex; justify-content:center; gap:2rem; padding:1rem; margin:0; list-style:none; font-weight:bold; }
+nav a { color:#2563eb; transition:0.3s; }
+nav a:hover { color:#1d4ed8; }
 
 /* Sections */
-section { padding:40px 0; }
-section h2 { font-size:2rem; margin-bottom:1rem; color:#1e40af; }
+section { padding:50px 20px; text-align:center; }
+section h2 { font-size:2rem; margin-bottom:1.5rem; color:#1e40af; }
 .section-content { max-width:900px; margin:0 auto; text-align:left; }
 
 /* Cards */
@@ -59,28 +53,32 @@ section h2 { font-size:2rem; margin-bottom:1rem; color:#1e40af; }
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
+<!-- Header -->
+<header>
 <img src="https://via.placeholder.com/140" alt="Elnaz Abbasifar">
+<div>
 <h1>Elnaz Abbasifar</h1>
 <p>M.Sc. in IT Management | B.Sc. in Computer Engineering – Software</p>
-<p>Email: <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></p>
-<p>LinkedIn: <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a></p>
-<p>GitHub: <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></p>
-<hr>
-<a href="#education">Education & Training</a>
-<a href="#research">Research Experience</a>
-<a href="#work">Work Experience</a>
-<a href="#projects">Projects</a>
-<a href="#skills">Skills</a>
-<a href="#certificates">Certificates</a>
+<p>Email: <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a> | 
+LinkedIn: <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a> | 
+GitHub: <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></p>
 </div>
+</header>
 
-<!-- Main content -->
-<div class="main-content">
+<!-- Navigation -->
+<nav>
+<ul>
+<li><a href="#education">Education & Training</a></li>
+<li><a href="#research">Research Experience</a></li>
+<li><a href="#work">Work Experience</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#certificates">Certificates</a></li>
+</ul>
+</nav>
 
 <!-- Education & Training -->
-<section id="education" data-animate>
+<section id="education" data-animate style="background:#eef2ff;">
 <h2>Education & Training</h2>
 <div class="section-content">
 <div class="card">
@@ -122,7 +120,7 @@ section h2 { font-size:2rem; margin-bottom:1rem; color:#1e40af; }
 </section>
 
 <!-- Work Experience -->
-<section id="work" data-animate>
+<section id="work" data-animate style="background:#eef2ff;">
 <h2>Work Experience</h2>
 <div class="section-content">
 <div class="card">
@@ -180,4 +178,58 @@ section h2 { font-size:2rem; margin-bottom:1rem; color:#1e40af; }
 </section>
 
 <!-- Skills -->
-<section id="skills" data-animate style="background:#
+<section id="skills" data-animate style="background:#eef2ff;">
+<h2>Skills</h2>
+<div class="section-content">
+<div class="card">
+<ul>
+<li>Programming: Python, C#, SQL</li>
+<li>Libraries: NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
+<li>Tools: SQL Server, Power BI, Git, Jupyter Notebook, Visual Studio, Google Colab</li>
+</ul>
+</div>
+</div>
+</section>
+
+<!-- Certificates Carousel -->
+<section id="certificates" data-animate>
+<h2>Certificates</h2>
+<div class="carousel" id="carousel">
+<div class="carousel-track" id="track">
+<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+1" alt="Certificate 1"></div>
+<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+2" alt="Certificate 2"></div>
+<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+3" alt="Certificate 3"></div>
+</div>
+<button class="carousel-btn left" id="prev">‹</button>
+<button class="carousel-btn right" id="next">›</button>
+</div>
+</section>
+
+<script>
+// Scroll animation
+function scrollAnimation() {
+  const elements = document.querySelectorAll('[data-animate]');
+  const triggerBottom = window.innerHeight * 0.85;
+  elements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+    if(boxTop < triggerBottom) el.classList.add('active');
+  });
+}
+window.addEventListener('scroll', scrollAnimation);
+window.addEventListener('load', scrollAnimation);
+
+// Carousel
+const track = document.getElementById('track');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const items = track.children;
+let index = 0;
+
+function updateCarousel() { track.style.transform = `translateX(-${index*260}px)`; }
+prev.addEventListener('click', () => { index = (index===0?items.length-1:index-1); updateCarousel(); });
+next.addEventListener('click', () => { index = (index===items.length-1?0:index+1); updateCarousel(); });
+setInterval(()=>{ index = (index+1)%items.length; updateCarousel(); }, 3000);
+</script>
+
+</body>
+</html>

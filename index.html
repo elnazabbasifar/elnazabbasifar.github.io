@@ -177,4 +177,40 @@ Passionate about Machine Learning, Data Management, and advancing real-world evi
 <section id="contact" data-animate>
 <h2>Contact</h2>
 <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-<p>
+<p>LinkedIn: <a href="https://www.linkedin.com/in/yourprofile" target="_blank">linkedin.com/in/yourprofile</a></p>
+<p>GitHub: <a href="https://github.com/yourprofile" target="_blank">github.com/yourprofile</a></p>
+</section>
+
+<!-- Footer -->
+<footer>
+© 2025 Elnaz Abbasifar. All rights reserved.
+</footer>
+
+<script>
+// Scroll animation
+function scrollAnimation() {
+  const elements = document.querySelectorAll('[data-animate]');
+  const triggerBottom = window.innerHeight * 0.85;
+  elements.forEach(el => {
+    const boxTop = el.getBoundingClientRect().top;
+    if(boxTop < triggerBottom) el.classList.add('active');
+  });
+}
+window.addEventListener('scroll', scrollAnimation);
+window.addEventListener('load', scrollAnimation);
+
+// Carousel
+const track = document.getElementById('track');
+const prev = document.getElementById('prev');
+const next = document.getElementById('next');
+const items = track.children;
+let index = 0;
+
+function updateCarousel() { track.style.transform = `translateX(-${index*260}px)`; }
+prev.addEventListener('click', () => { index = (index===0?items.length-1:index-1); updateCarousel(); });
+next.addEventListener('click', () => { index = (index===items.length-1?0:index+1); updateCarousel(); });
+setInterval(()=>{ index = (index+1)%items.length; updateCarousel(); }, 3000);
+</script>
+
+</body>
+</html>

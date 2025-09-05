@@ -5,231 +5,211 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Elnaz Abbasifar</title>
 <style>
-/* Basic Reset */
-body, html { margin:0; padding:0; font-family: Arial,sans-serif; scroll-behavior: smooth; background:#f9fafb; color:#333; }
-a { text-decoration:none; color:#2563eb; }
-a:hover { text-decoration:underline; }
+/* Reset */
+body, html { margin:0; padding:0; font-family: Arial,sans-serif; scroll-behavior:smooth; background:#f9fafb; color:#333; }
+a { text-decoration:none; }
 
-/* Header - left aligned */
-header { background: linear-gradient(135deg, #4f46e5, #6366f1); color:white; text-align:left; padding:40px 60px; display:flex; align-items:center; gap:20px; }
-header img { width:140px; height:140px; border-radius:50%; object-fit:cover; border:4px solid white; box-shadow:0 8px 20px rgba(0,0,0,0.3);}
-header div { max-width:600px; }
-header h1 { font-size:2.5rem; margin-bottom:0.3rem; }
-header p { font-size:1rem; line-height:1.4; margin-bottom:0.5rem; }
+/* Layout */
+.container { display:flex; }
 
-/* Nav */
-nav { position:sticky; top:0; background:white; box-shadow:0 2px 6px rgba(0,0,0,0.1); z-index:20; }
-nav ul { display:flex; justify-content:center; gap:2rem; padding:1rem; margin:0; list-style:none; font-weight:bold; }
-nav a { color:#2563eb; transition:0.3s; }
-nav a:hover { color:#1d4ed8; }
+/* Sidebar (Header) */
+.sidebar {
+  width:260px;
+  background:#f0f0f0;
+  padding:30px 20px;
+  min-height:100vh;
+  box-sizing:border-box;
+}
+.sidebar img {
+  width:140px; height:140px;
+  border-radius:50%; object-fit:cover;
+  display:block; margin:0 auto 20px auto;
+}
+.sidebar h1 {
+  font-size:1.6rem; text-align:center; margin-bottom:10px;
+}
+.sidebar p {
+  font-size:0.95rem; line-height:1.6; text-align:center; margin:5px 0;
+}
+.sidebar a { color:#2563eb; }
 
-/* Sections */
-section { padding:50px 20px; text-align:center; }
-section h2 { font-size:2rem; margin-bottom:1.5rem; color:#1e40af; }
-.section-content { max-width:900px; margin:0 auto; text-align:left; }
+/* Navigation */
+nav {
+  margin-top:30px;
+}
+.nav-link {
+  display:block;
+  color:#333;
+  font-weight:bold;
+  margin:10px 0;
+  position:relative;
+  transition: all 0.3s ease;
+}
+.nav-link:hover {
+  color:#1e40af;
+}
+.nav-link::after {
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:#1e40af;
+  left:0;
+  bottom:-3px;
+  transition: width 0.3s ease;
+}
+.nav-link:hover::after { width:100%; }
 
-/* Cards */
-.card { background:white; padding:20px; border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1); margin-bottom:20px; transition:0.3s; }
-.card:hover { transform:scale(1.02); box-shadow:0 8px 25px rgba(0,0,0,0.2); }
+/* Main Content */
+.main {
+  flex:1;
+  padding:40px;
+}
+section { margin-bottom:60px; }
+section h2 {
+  font-size:2rem;
+  margin-bottom:20px;
+  color:#1e40af;
+}
+.card {
+  background:white; padding:20px;
+  border-radius:12px; box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  margin-bottom:20px;
+}
 
 /* Grid for projects */
-.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; }
+.cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px; }
 
 /* Carousel */
-.carousel { position:relative; overflow:hidden; max-width:900px; margin:0 auto; }
+.carousel { position:relative; overflow:hidden; max-width:800px; margin:0 auto; }
 .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
-.carousel-item { flex:0 0 260px; margin-right:1rem; border-radius:8px; overflow:hidden; }
-.carousel-item img { width:100%; height:180px; object-fit:cover; transition:0.3s; }
-.carousel-item img:hover { transform:scale(1.05); }
-.carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:#2563eb; color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer; font-size:1.5rem; transition:0.3s; }
-.carousel-btn:hover { background:#1d4ed8; }
+.carousel-item { flex:0 0 240px; margin-right:1rem; border-radius:8px; overflow:hidden; }
+.carousel-item img { width:100%; height:160px; object-fit:cover; }
+.carousel-btn {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:#2563eb; color:white; border:none;
+  padding:6px 10px; border-radius:50%; cursor:pointer;
+}
 .carousel-btn.left { left:10px; }
 .carousel-btn.right { right:10px; }
 
-/* Scroll animation */
-[data-animate] { opacity:0; transform:translateY(30px); transition:all 0.8s ease-out; }
-[data-animate].active { opacity:1; transform:translateY(0); }
+/* Footer */
+footer {
+  text-align:center; padding:20px; background:#4f46e5; color:white;
+}
 </style>
 </head>
 <body>
+<div class="container">
 
-<!-- Header -->
-<header>
-<img src="https://via.placeholder.com/140" alt="Elnaz Abbasifar">
-<div>
-<h1>Elnaz Abbasifar</h1>
-<p>M.Sc. in IT Management | B.Sc. in Computer Engineering – Software</p>
-<p>Email: <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a> | 
-LinkedIn: <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a> | 
-GitHub: <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></p>
+<!-- Sidebar -->
+<div class="sidebar">
+  <img src="https://via.placeholder.com/140" alt="Elnaz Abbasifar">
+  <h1>Elnaz Abbasifar</h1>
+  <p>M.Sc. in IT Management<br>B.Sc. in Computer Engineering</p>
+  <p>Email: <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></p>
+  <p><a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">LinkedIn</a> | 
+     <a href="https://github.com/elnazabbasifar" target="_blank">GitHub</a></p>
+  <nav>
+    <a href="#education" class="nav-link">Education & Training</a>
+    <a href="#research" class="nav-link">Research</a>
+    <a href="#work" class="nav-link">Work Experience</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#certificates" class="nav-link">Certificates</a>
+  </nav>
 </div>
-</header>
 
-<!-- Navigation -->
-<nav>
-<ul>
-<li><a href="#education">Education & Training</a></li>
-<li><a href="#research">Research Experience</a></li>
-<li><a href="#work">Work Experience</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#certificates">Certificates</a></li>
-</ul>
-</nav>
+<!-- Main Content -->
+<div class="main">
+  <section id="education">
+    <h2>Education & Training</h2>
+    <div class="card">
+      <h3>Degrees</h3>
+      <ul>
+        <li>M.Sc. in IT Management (Advanced Information Systems)</li>
+        <li>B.Sc. in Computer Engineering – Software</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Summer Schools & Training</h3>
+      <ul>
+        <li>AI Autumn School, Amirkabir Univ., Iran (2021)</li>
+        <li>Resource-Aware ML, TU Dortmund, Germany (2020)</li>
+        <li>Security of Things (SeThi), Univ. Rostock, Germany (2020)</li>
+        <li>Lviv Data Science Summer School, Ukraine (2020)</li>
+      </ul>
+    </div>
+  </section>
 
-<!-- Education & Training -->
-<section id="education" data-animate style="background:#eef2ff;">
-<h2>Education & Training</h2>
-<div class="section-content">
-<div class="card">
-<h3>Academic Degrees</h3>
-<ul>
-<li>M.Sc. in IT Management (Advanced Information Systems)</li>
-<li>B.Sc. in Computer Engineering – Software</li>
-</ul>
-</div>
-<div class="card">
-<h3>Summer Schools & Specialized Training</h3>
-<ul>
-<li><b>Artificial Intelligence Autumn School</b>, Amirkabir University of Technology, Iran (Nov–Dec 2021)</li>
-<li><b>Resource-Aware Machine Learning</b>, 5th International Summer School, TU Dortmund University, Germany (Sep 2020)</li>
-<li><b>Security of Things (SeThi 2020)</b>, University of Rostock, Germany (Aug–Sep 2020)</li>
-<li><b>Lviv Data Science Summer School</b>, Ukrainian Catholic University, Ukraine (Jul 2020)</li>
-</ul>
-</div>
-</div>
-</section>
+  <section id="research">
+    <h2>Research Experience</h2>
+    <div class="card">
+      <h3>AI Researcher – Technology Studies Institute (2021)</h3>
+      <p>Comparative analysis of global AI ecosystems; collaborated with interdisciplinary scientists.</p>
+    </div>
+    <div class="card">
+      <h3>Graduate Researcher – Payame Noor University (2016–2018)</h3>
+      <p>Conducted research on social network analysis for MSc thesis.</p>
+    </div>
+  </section>
 
-<!-- Research Experience -->
-<section id="research" data-animate>
-<h2>Research Experience</h2>
-<div class="section-content">
-<div class="card">
-<h3>AI Researcher – Technology Studies Institute, Tehran, Iran (Feb – Sep 2021)</h3>
-<ul>
-<li>Conducted comparative analysis of global AI ecosystems, ranking sustainability indicators.</li>
-</ul>
-</div>
-<div class="card">
-<h3>Graduate Researcher (Master’s Thesis) – Payame Noor University, Tehran, Iran (2016 – 2018)</h3>
-<ul>
-<li>Conducted research on social network analysis as part of MSc thesis.</li>
-</ul>
-</div>
-</div>
-</section>
+  <section id="work">
+    <h2>Work Experience</h2>
+    <div class="card"><h3>BPM Data Analyst – Pegah Aftab (2021–Now)</h3><p>Designed processes & UI with C# and React.</p></div>
+    <div class="card"><h3>BI Developer – Pegah Aftab (2024)</h3><p>Built Power BI dashboards for performance metrics.</p></div>
+    <div class="card"><h3>Data Science Intern – T25 Company (2020)</h3><p>Automated data workflows with Python.</p></div>
+    <div class="card"><h3>SQL/BPM Developer – Payam Mashregh (2014–2017)</h3><p>Led 9-member team optimizing processes.</p></div>
+  </section>
 
-<!-- Work Experience -->
-<section id="work" data-animate style="background:#eef2ff;">
-<h2>Work Experience</h2>
-<div class="section-content">
-<div class="card">
-<h3>BPM Data Analyst – Pegah Aftab, Tehran, Iran (Apr 2021 – Present)</h3>
-<ul>
-<li>Designed and implemented business processes and UI components using C# and React.</li>
-</ul>
-</div>
-<div class="card">
-<h3>BI Developer – Pegah Aftab, Tehran, Iran (Jun – Dec 2024)</h3>
-<ul>
-<li>Developed interactive dashboards in Power BI to visualize key performance metrics.</li>
-</ul>
-</div>
-<div class="card">
-<h3>Data Science Intern (Python) – T25 Company, Tehran, Iran (Nov 2020 – Jan 2021)</h3>
-<ul>
-<li>Developed Python scripts to automate data collection, processing, and analysis.</li>
-</ul>
-</div>
-<div class="card">
-<h3>SQL Developer / BPM Developer – Payam Mashregh, Esfahan, Iran (2014 – 2017)</h3>
-<ul>
-<li>Supervised a 9-member development team and implemented SQL queries to optimize workflows.</li>
-</ul>
-</div>
-</div>
-</section>
+  <section id="projects">
+    <h2>Projects</h2>
+    <div class="cards">
+      <div class="card"><h3>Tree-Structured Graph Classification (2025)</h3><p>GNN with PyTorch Geometric.</p></div>
+      <div class="card"><h3>Cardio Risk Prediction (2023)</h3><p>Lasso Regression model.</p></div>
+      <div class="card"><h3>Ensemble Learning (2023)</h3><p>Random Forest & Decision Trees.</p></div>
+      <div class="card"><h3>EDA Seattle Traffic Data (2020)</h3><p>Exploratory data analysis for safety insights.</p></div>
+    </div>
+  </section>
 
-<!-- Projects -->
-<section id="projects" data-animate>
-<h2>Projects</h2>
-<div class="section-content cards">
-<div class="card">
-<h3>Tree-Structured Graph Classification with GNN – 2025</h3>
-<p>GCN using PyTorch Geometric to classify tree graphs.</p>
-<a href="#">GitHub Project Link</a>
-</div>
-<div class="card">
-<h3>Precision in Cardiovascular Risk Prediction – ShineTech, 2023</h3>
-<p>Lasso Regression model for cardiovascular risk prediction.</p>
-<a href="#">GitHub Project Link</a>
-</div>
-<div class="card">
-<h3>Advanced Prediction with Ensemble Learning – ShineTech, 2023</h3>
-<p>Mobile price prediction using Decision Trees and Random Forest.</p>
-<a href="#">GitHub Project Link</a>
-</div>
-<div class="card">
-<h3>EDA Seattle Area Traffic Collision Data – Data Circles, 2020</h3>
-<p>Analyzed traffic collision data to prioritize road improvements.</p>
-<a href="#">GitHub Project Link</a>
-</div>
-</div>
-</section>
+  <section id="skills">
+    <h2>Skills</h2>
+    <div class="card">
+      <ul>
+        <li>Programming: Python, C#, SQL</li>
+        <li>Libraries: NumPy, Pandas, Scikit-learn, PyTorch Geometric</li>
+        <li>Tools: Power BI, Git, SQL Server, Jupyter, VS, Colab</li>
+      </ul>
+    </div>
+  </section>
 
-<!-- Skills -->
-<section id="skills" data-animate style="background:#eef2ff;">
-<h2>Skills</h2>
-<div class="section-content">
-<div class="card">
-<ul>
-<li>Programming: Python, C#, SQL</li>
-<li>Libraries: NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
-<li>Tools: SQL Server, Power BI, Git, Jupyter Notebook, Visual Studio, Google Colab</li>
-</ul>
+  <section id="certificates">
+    <h2>Certificates</h2>
+    <div class="carousel" id="carousel">
+      <div class="carousel-track" id="track">
+        <div class="carousel-item"><img src="https://via.placeholder.com/240x160?text=Cert+1"></div>
+        <div class="carousel-item"><img src="https://via.placeholder.com/240x160?text=Cert+2"></div>
+        <div class="carousel-item"><img src="https://via.placeholder.com/240x160?text=Cert+3"></div>
+      </div>
+      <button class="carousel-btn left" id="prev">‹</button>
+      <button class="carousel-btn right" id="next">›</button>
+    </div>
+  </section>
 </div>
 </div>
-</section>
 
-<!-- Certificates Carousel -->
-<section id="certificates" data-animate>
-<h2>Certificates</h2>
-<div class="carousel" id="carousel">
-<div class="carousel-track" id="track">
-<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+1" alt="Certificate 1"></div>
-<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+2" alt="Certificate 2"></div>
-<div class="carousel-item"><img src="https://via.placeholder.com/260x180?text=Cert+3" alt="Certificate 3"></div>
-</div>
-<button class="carousel-btn left" id="prev">‹</button>
-<button class="carousel-btn right" id="next">›</button>
-</div>
-</section>
+<footer>© 2025 Elnaz Abbasifar. All rights reserved.</footer>
 
 <script>
-// Scroll animation
-function scrollAnimation() {
-  const elements = document.querySelectorAll('[data-animate]');
-  const triggerBottom = window.innerHeight * 0.85;
-  elements.forEach(el => {
-    const boxTop = el.getBoundingClientRect().top;
-    if(boxTop < triggerBottom) el.classList.add('active');
-  });
-}
-window.addEventListener('scroll', scrollAnimation);
-window.addEventListener('load', scrollAnimation);
-
-// Carousel
 const track = document.getElementById('track');
 const prev = document.getElementById('prev');
 const next = document.getElementById('next');
 const items = track.children;
 let index = 0;
-
-function updateCarousel() { track.style.transform = `translateX(-${index*260}px)`; }
+function updateCarousel() { track.style.transform = `translateX(-${index*240}px)`; }
 prev.addEventListener('click', () => { index = (index===0?items.length-1:index-1); updateCarousel(); });
 next.addEventListener('click', () => { index = (index===items.length-1?0:index+1); updateCarousel(); });
 setInterval(()=>{ index = (index+1)%items.length; updateCarousel(); }, 3000);
 </script>
-
 </body>
 </html>

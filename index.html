@@ -11,71 +11,73 @@
   <style>
     /* ---------- Reset & Base ---------- */
     :root{
-      --sidebar-bg:#f0f0f0;
-      --text:#333333;
+      --text:#374151;
       --muted:#6b7280;
-      --card-bg:#ffffff;
       --accent:#1e40af;
+      --sidebar-bg:#f3f4f6;
+      --card-bg:#ffffff;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;padding:0;font-family: 'Segoe UI', Tahoma, Arial; background:#f8fafc;color:var(--text); -webkit-font-smoothing:antialiased; direction:ltr;}
+    html,body{height:100%;margin:0;padding:0;font-family:'Segoe UI', Tahoma, Arial, sans-serif; background:#f8fafc;color:var(--text); -webkit-font-smoothing:antialiased; direction:ltr;}
     a{color:var(--accent); text-decoration:none;}
     a:hover{text-decoration:underline}
 
     /* ---------- Layout ---------- */
     .layout{display:flex;min-height:100vh;}
 
-    /* Sidebar (header on left) */
+    /* ---------- Sidebar (Professional) ---------- */
     .sidebar{
       width:280px;
       background:var(--sidebar-bg);
-      padding:28px 20px;
+      padding:30px 20px;
       position:fixed;
       left:0; top:0; bottom:0;
-      overflow:auto;
-      border-right:1px solid rgba(0,0,0,0.04);
-      font-family: 'Segoe UI', Tahoma, Arial;
+      overflow-y:auto;
+      border-right:1px solid #d1d5db;
+      color:var(--text);
     }
-    .photo{
-      width:128px;height:128px;border-radius:50%;object-fit:cover;border:3px solid #eaeefb; display:block;margin:0 auto 14px;
-      box-shadow:0 8px 20px rgba(16,24,40,0.06);
+    .sidebar-header{text-align:center;margin-bottom:30px;}
+    .sidebar-header .photo{
+      width:120px; height:120px;
+      border-radius:50%; object-fit:cover;
+      border:3px solid #e5e7eb;
+      box-shadow:0 6px 16px rgba(0,0,0,0.08);
+      margin-bottom:12px;
     }
-    .name{ text-align:center; font-weight:700; font-size:1.15rem; color:#111827; margin-bottom:8px; line-height:1.35;}
-    .title{ text-align:center; color:var(--muted); font-size:0.95rem; margin:0 0 14px; line-height:1.6; padding:0 6px;}
-    .contact{ font-size:0.88rem; color:var(--text); margin-top:14px; margin-bottom:20px; line-height:1.6; text-align:center;}
-    .contact a{color:var(--accent)}
-    hr.sep{border:none;height:1px;background:rgba(0,0,0,0.04); margin:18px 0}
-
-    .sidebar h4{font-size:0.95rem;color:#111827;margin:12px 0 8px}
-    .skill-list{font-size:0.92rem;color:var(--text);line-height:1.6}
+    .sidebar-header .name{
+      font-weight:700; font-size:1.25rem; color:#111827; line-height:1.3; margin-bottom:4px;
+    }
+    .sidebar-header .title{
+      font-size:0.9rem; color:var(--muted); line-height:1.4; margin:0 auto;
+    }
+    .sidebar-section{margin-bottom:28px;}
+    .sidebar-section h4{
+      font-size:0.95rem; font-weight:600; color:#111827;
+      border-bottom:1px solid #d1d5db; padding-bottom:6px; margin-bottom:12px;
+    }
+    .sidebar-section ul{list-style:none;padding:0;margin:0;}
+    .sidebar-section ul li{margin-bottom:8px;font-size:0.95rem;line-height:1.5;color:var(--text);}
+    .sidebar-section ul li a{color:#4b5563;text-decoration:none;}
+    .sidebar-section ul li a:hover{color:var(--accent);text-decoration:underline;}
+    .sidebar::-webkit-scrollbar{width:6px;}
+    .sidebar::-webkit-scrollbar-thumb{background-color:rgba(107,114,128,0.5);border-radius:3px;}
+    .sidebar::-webkit-scrollbar-track{background:transparent;}
 
     /* ---------- Top Navbar (outside sidebar) ---------- */
     .topnav{
-      position:fixed;
-      left:280px; right:0; top:0;
-      height:56px;
-      background:#ffffff;
+      position:fixed; left:280px; right:0; top:0;
+      height:56px; background:#ffffff;
       border-bottom:1px solid rgba(0,0,0,0.04);
-      display:flex;
-      align-items:center;
-      gap:18px;
-      padding:0 28px;
-      z-index:40;
+      display:flex; align-items:center; gap:18px;
+      padding:0 28px; z-index:40;
     }
-    .topnav a{
-      color:var(--text);
-      font-weight:600;
-      padding:6px 10px;
-      border-radius:6px;
-      transition:all .18s;
-      text-decoration:none;
-    }
+    .topnav a{color:var(--text); font-weight:600; padding:6px 10px; border-radius:6px; transition:all .18s; text-decoration:none;}
     .topnav a:hover{color:var(--accent); background:rgba(30,64,175,0.04)}
 
     /* ---------- Content ---------- */
     .content{
       margin-left:280px;
-      padding:90px 40px 60px 40px; /* leave space for topnav */
+      padding:90px 40px 60px 40px; 
       width:calc(100% - 280px);
     }
     section{margin-bottom:34px}
@@ -101,7 +103,41 @@
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
 
-    /* Carousel removed for Certificates (now using modal gallery) */
+    /* Certificates (Modal Gallery) */
+    .cert-gallery img {
+      width:100%;
+      border-radius:8px;
+      cursor:pointer;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      transition:0.3s;
+    }
+    .cert-gallery img:hover {
+      transform:scale(1.02);
+      box-shadow:0 6px 18px rgba(0,0,0,0.15);
+    }
+    #imgModal {
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.8);
+      align-items:center;
+      justify-content:center;
+      z-index:50;
+    }
+    #imgModal img {
+      max-height:90%;
+      max-width:90%;
+      border-radius:8px;
+      box-shadow:0 8px 24px rgba(0,0,0,0.3);
+    }
+    #imgModal span {
+      position:absolute;
+      top:20px;
+      right:30px;
+      color:white;
+      font-size:2.5rem;
+      cursor:pointer;
+    }
 
     /* Responsive */
     @media (max-width:900px){
@@ -114,31 +150,35 @@
 <body>
 
   <div class="layout">
-    <!-- SIDEBAR (header on left) -->
+    <!-- SIDEBAR -->
     <aside class="sidebar" role="complementary">
-      <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
-      <div class="name">Elnaz Abbasifar</div>
-      <div class="title">M.Sc. in IT Management (Advanced Information Systems) — B.Sc. Computer Engineering (Software)</div>
-
-      <div class="contact">
-        <div><strong>Email:</strong> <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></div>
-        <div><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a></div>
-        <div><strong>GitHub:</strong> <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></div>
+      <div class="sidebar-header">
+        <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
+        <div class="name">Elnaz Abbasifar</div>
+        <p>PhD Applicant | Machine Learning | Data Management | Health Informatics<br></p>
+        <div class="title">M.Sc. in IT Management (Advanced Information Systems)<br>B.Sc. Computer Engineering (Software)</div>
       </div>
 
-      <hr class="sep">
+      <div class="sidebar-section">
+        <h4>Contact</h4>
+        <ul>
+          <li><strong>Email:</strong> <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></li>
+          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a></li>
+          <li><strong>GitHub:</strong> <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></li>
+        </ul>
+      </div>
 
-      <h4>Skills</h4>
-      <div class="skill-list">
-        <ul style="padding-left:1rem;margin:0">
-          <li><strong>Programming & Scripting:</strong> Python, C#, SQL</li>
-          <li><strong>Data Science & ML Libraries:</strong> NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
+      <div class="sidebar-section">
+        <h4>Skills</h4>
+        <ul>
+          <li><strong>Programming:</strong> Python, C#, SQL</li>
+          <li><strong>Data & ML Libraries:</strong> NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
           <li><strong>Tools & Platforms:</strong> SQL Server, Power BI, Git, Jupyter, Visual Studio, Google Colab</li>
         </ul>
       </div>
     </aside>
 
-    <!-- TOP NAV (outside sidebar) -->
+    <!-- TOP NAV -->
     <header class="topnav" role="navigation" aria-label="Top navigation">
       <a href="#academic">Academic</a>
       <a href="#publications">Publications</a>
@@ -151,7 +191,7 @@
     <!-- MAIN CONTENT -->
     <main class="content" role="main">
 
-      <!-- Academic Background & Training -->
+      <!-- Academic Background -->
       <section id="academic" data-aos="fade-up">
         <h2 class="section-title">Academic Background & Training</h2>
         <div class="card" data-aos="zoom-in">
@@ -167,14 +207,12 @@
       <!-- Publications -->
       <section id="publications" data-aos="fade-up">
         <h2 class="section-title">Publications</h2>
-
         <div class="card pub-card" data-aos="fade-up" data-aos-delay="40">
           <div class="pub-item">
             <div><b>E. Abbasifar, A. Shayan</b></div>
             <div class="muted">The Impact of Social Network Applications on Customer Trust in Small Businesses with the Mediating Role of Brand Reputation: A Structural Equations Modeling Approach (Case Study: Modiseh Online Store). 2nd International Conference on Interdisciplinary Studies in Management & Engineering, University of Tehran, 2020.</div>
           </div>
         </div>
-
         <div class="card pub-card" data-aos="fade-up" data-aos-delay="80">
           <div class="pub-item">
             <div><b>E. Abbasifar</b></div>
@@ -186,7 +224,6 @@
       <!-- Research Experience -->
       <section id="research" data-aos="fade-right">
         <h2 class="section-title">Research Experience</h2>
-
         <div class="card" data-aos="zoom-in" data-aos-delay="60">
           <div style="font-weight:700">AI Researcher — Technology Studies Institute, Tehran, Iran (Feb – Sep 2021)</div>
           <ul class="clean">
@@ -194,7 +231,6 @@
             <li>Collaborated with interdisciplinary scientists to integrate insights across computer science, policy, and management.</li>
           </ul>
         </div>
-
         <div class="card" data-aos="zoom-in" data-aos-delay="100">
           <div style="font-weight:700">Graduate Researcher (Master’s Thesis) — Payame Noor University, Tehran, Iran (2016 – 2018)</div>
           <ul class="clean">
@@ -203,40 +239,36 @@
         </div>
       </section>
 
-      <!-- Certificates Section (Professional Modal Gallery) -->
+      <!-- Certificates -->
       <section id="certificates" data-aos="fade-up">
         <h2 class="section-title">Certificates</h2>
         <div class="cert-gallery" style="display:flex; flex-direction:column; gap:16px; max-width:600px; margin:0 auto;">
-          <img src="images/cert1.jpg" alt="Certificate 1" class="cert-thumb" onclick="openModal(this)" style="width:100%; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s;">
-          <img src="images/cert2.jpg" alt="Certificate 2" class="cert-thumb" onclick="openModal(this)" style="width:100%; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s;">
-          <img src="images/cert3.jpg" alt="Certificate 3" class="cert-thumb" onclick="openModal(this)" style="width:100%; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s;">
-          <img src="images/cert4.jpg" alt="Certificate 4" class="cert-thumb" onclick="openModal(this)" style="width:100%; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s;">
-          <img src="images/cert5.jpg" alt="Certificate 5" class="cert-thumb" onclick="openModal(this)" style="width:100%; border-radius:8px; cursor:pointer; box-shadow:0 4px 12px rgba(0,0,0,0.1); transition:0.3s;">
+          <img src="images/cert1.jpg" alt="Certificate 1" onclick="openModal(this)">
+          <img src="images/cert2.jpg" alt="Certificate 2" onclick="openModal(this)">
+          <img src="images/cert3.jpg" alt="Certificate 3" onclick="openModal(this)">
+          <img src="images/cert4.jpg" alt="Certificate 4" onclick="openModal(this)">
+          <img src="images/cert5.jpg" alt="Certificate 5" onclick="openModal(this)">
         </div>
       </section>
 
       <!-- Projects -->
       <section id="projects" data-aos="zoom-in">
         <h2 class="section-title">Projects</h2>
-
         <div class="card" data-aos="fade-up" data-aos-delay="60">
           <div class="project-title">Tree-Structured Graph Classification with GNN — 2025</div>
           <div class="project-meta">A GCN using PyTorch Geometric to classify tree graphs.</div>
           <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="100">
           <div class="project-title">Precision in Cardiovascular Risk Prediction: A Lasso Regression Approach — ShineTech, 2023</div>
           <div class="project-meta">A Lasso Regression model for cardiovascular risk prediction.</div>
           <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="140">
           <div class="project-title">Advanced Prediction using Ensemble Learning Techniques — ShineTech, 2023</div>
           <div class="project-meta">Mobile price prediction models using Decision Trees and Random Forest.</div>
           <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="180">
           <div class="project-title">EDA Seattle Area Traffic Collision Data — Data Circles, 2020</div>
           <div class="project-meta">During Data Circles workshop, we analyzed Seattle traffic collision data to help prioritize road improvements and prevent future collisions through Exploratory Data Analysis (EDA).</div>
@@ -247,7 +279,6 @@
       <!-- Work Experience -->
       <section id="work" data-aos="fade-right">
         <h2 class="section-title">Work Experience</h2>
-
         <div class="card" data-aos="fade-up" data-aos-delay="60">
           <div style="font-weight:700">BPM Data Analyst — Pegah Aftab, Tehran, Iran (Apr 2021 – Present)</div>
           <ul class="clean">
@@ -255,21 +286,18 @@
             <li>Analyzed workflows and authored technical documentation to support process optimization.</li>
           </ul>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="100">
           <div style="font-weight:700">BI Developer — Pegah Aftab, Tehran, Iran (Jun – Dec 2024)</div>
           <ul class="clean">
             <li>Developed interactive dashboards in Power BI to visualize key performance metrics and support decision-making.</li>
           </ul>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="140">
           <div style="font-weight:700">Data Science Intern (Python) — T25 Company, Tehran, Iran (Nov 2020 – Jan 2021)</div>
           <ul class="clean">
             <li>Developed Python scripts to automate data collection, processing, and analysis.</li>
           </ul>
         </div>
-
         <div class="card" data-aos="fade-up" data-aos-delay="180">
           <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Esfahan, Iran (2014 – 2017)</div>
           <ul class="clean">
@@ -283,9 +311,9 @@
   </div>
 
   <!-- Modal for full-size certificate image -->
-  <div id="imgModal" class="fixed inset-0 bg-black bg-opacity-80 hidden items-center justify-center z-50">
-    <span class="absolute top-5 right-8 text-white text-3xl cursor-pointer" onclick="closeModal()">&times;</span>
-    <img id="modalImage" class="max-h-[90%] max-w-[90%] rounded-lg shadow-lg">
+  <div id="imgModal">
+    <span onclick="closeModal()">&times;</span>
+    <img id="modalImage" alt="Full-size certificate">
   </div>
 
   <script>
@@ -301,16 +329,20 @@
     window.addEventListener('scroll', scrollAnimation);
     window.addEventListener('load', scrollAnimation);
 
-    // Modal functions
+    // Modal functions for certificates
     function openModal(imgElement) {
-      document.getElementById("imgModal").classList.remove("hidden");
-      document.getElementById("imgModal").classList.add("flex");
+      const modal = document.getElementById("imgModal");
+      modal.style.display = "flex";
       document.getElementById("modalImage").src = imgElement.src;
     }
     function closeModal() {
-      document.getElementById("imgModal").classList.add("hidden");
-      document.getElementById("imgModal").classList.remove("flex");
+      document.getElementById("imgModal").style.display = "none";
     }
+  </script>
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({duration:600,once:true});
   </script>
 
 </body>

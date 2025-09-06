@@ -291,17 +291,27 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration:900, once:true, easing:'ease-out-cubic' });
-
-    // small carousel auto-scroll (visual only)
+  
+    // Certificates carousel (loop one by one)
     (function(){
       const track = document.querySelector('.carousel');
       if(!track) return;
-      let pos = 0;
+      const items = track.querySelectorAll('.cert');
+      let index = 0;
+  
+      function showSlide(i){
+        track.scrollTo({ 
+          left: items[i].offsetLeft, 
+          behavior: 'smooth' 
+        });
+      }
+  
       setInterval(()=>{
-        pos = (pos + 232) % (track.scrollWidth);
-        track.scrollTo({ left: pos, behavior: 'smooth' });
+        index = (index + 1) % items.length;
+        showSlide(index);
       }, 3000);
     })();
   </script>
+
 </body>
 </html>

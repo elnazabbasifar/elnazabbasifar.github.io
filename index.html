@@ -316,29 +316,68 @@
     </main>
   </div>
 
-  <!-- AOS JS -->
+  <!-- AOS + Certificates carousel script -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration:900, once:true, easing:'ease-out-cubic' });
   
-    // Certificates carousel (loop one by one)
     (function(){
-      const track = document.querySelector('.carousel');
-      if(!track) return;
-      const items = track.querySelectorAll('.cert');
+      const wrap = document.querySelector('.carousel-wrap');
+      const track = wrap?.querySelector('.carousel-track');
+      if(!wrap || !track) return;
+  
+      const items = Array.from(track.children);
       let index = 0;
+      let timer = null;
   
       function showSlide(i){
-        track.scrollTo({ 
-          left: items[i].offsetLeft, 
-          behavior: 'smooth' 
-        });
+        const item = items[i];
+        // center the item inside the visible wrap
+        const offset = item.offsetLeft - Math.max(0, (wrap.clientWidth - item.offsetWidth)/2);
+        track.style.transform = `translateX(-${offset}px)`;
       }
   
-      setInterval(()=>{
+      function startAuto(){
+        stopAuto();
+        timer = setInterval(()=>{
+          index = (index + 1) % items.length;
+          showSlide(index);
+        }, 3000);
+      }
+  
+      function stopAuto(){
+        if(timer){ clearInterval(timer); timer = null; }
+      }
+  
+      // Controls
+      const prevBtn = document.querySelector('.carousel-btn.prev');
+      const nextBtn = document.querySelector('.carousel-btn.next');
+  
+      prevBtn?.addEventListener('click', () => {
+        stopAuto();
+        index = (index - 1 + items.length) % items.length;
+        showSlide(index);
+        startAuto();
+      });
+  
+      nextBtn?.addEventListener('click', () => {
+        stopAuto();
         index = (index + 1) % items.length;
         showSlide(index);
-      }, 3000);
+        startAuto();
+      });
+  
+      // Pause on hover
+      wrap.addEventListener('mouseenter', stopAuto);
+      wrap.addEventListener('mouseleave', startAuto);
+  
+      // init after images/layout ready
+      window.addEventListener('load', () => {
+        // make sure first slide centered
+        showSlide(index);
+        startAuto();
+      });
+      window.addEventListener('resize', () => showSlide(index));
     })();
   </script>
 

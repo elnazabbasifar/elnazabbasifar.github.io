@@ -1,2 +1,2 @@
 # elnazabbasifar.github.io
-A personal portfolio website
+A personal website

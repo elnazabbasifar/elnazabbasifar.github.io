@@ -103,41 +103,21 @@
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
 
-    /* Certificates (Modal Gallery) */
-    .cert-gallery img {
-      width:100%;
-      border-radius:8px;
-      cursor:pointer;
-      box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      transition:0.3s;
-    }
-    .cert-gallery img:hover {
-      transform:scale(1.02);
-      box-shadow:0 6px 18px rgba(0,0,0,0.15);
-    }
-    #imgModal {
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,0.8);
-      align-items:center;
-      justify-content:center;
-      z-index:50;
-    }
-    #imgModal img {
-      max-height:90%;
-      max-width:90%;
-      border-radius:8px;
-      box-shadow:0 8px 24px rgba(0,0,0,0.3);
-    }
-    #imgModal span {
-      position:absolute;
-      top:20px;
-      right:30px;
-      color:white;
-      font-size:2.5rem;
-      cursor:pointer;
-    }
+    /* Certificates Carousel */
+    #certificates-carousel{position:relative; max-width:800px; margin:0 auto; overflow:hidden; background:transparent; border-radius:12px;}
+    #certificates-carousel-track{display:flex; transition:transform 0.5s ease-in-out;}
+    .cert-carousel-item{flex:0 0 100%; display:flex; justify-content:center; align-items:center; padding:12px;}
+    .cert-carousel-item img{max-width:100%; max-height:400px; object-fit:contain; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.15); cursor:pointer; transition:0.3s;}
+    .cert-carousel-item img:hover{transform:scale(1.02);}
+    .cert-carousel-btn{position:absolute; top:50%; transform:translateY(-50%); background:rgba(107,114,128,0.8); color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer; font-size:1.5rem; transition:0.3s;}
+    .cert-carousel-btn:hover{background:rgba(107,114,128,1);}
+    .cert-carousel-btn.left{left:12px;}
+    .cert-carousel-btn.right{right:12px;}
+
+    /* Modal for full-size image */
+    #cert-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:1000;}
+    #cert-modal img{max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 8px 22px rgba(0,0,0,0.25);}
+    #cert-modal span{position:absolute; top:20px; right:28px; font-size:2.5rem; color:white; cursor:pointer;}
 
     /* Responsive */
     @media (max-width:900px){
@@ -149,201 +129,223 @@
 </head>
 <body>
 
-  <div class="layout">
-    <!-- SIDEBAR -->
-    <aside class="sidebar" role="complementary">
-      <div class="sidebar-header">
-        <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
-        <div class="name">Elnaz Abbasifar</div>
-        <p>PhD Applicant | Machine Learning | Data Management | Health Informatics<br></p>
-        <div class="title">M.Sc. in IT Management (Advanced Information Systems)<br>B.Sc. Computer Engineering (Software)</div>
-      </div>
+<div class="layout">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" role="complementary">
+    <div class="sidebar-header">
+      <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
+      <div class="name">Elnaz Abbasifar</div>
+      <p>PhD Applicant | Machine Learning | Data Management | Health Informatics<br></p>
+      <div class="title">M.Sc. in IT Management (Advanced Information Systems)<br>B.Sc. Computer Engineering (Software)</div>
+    </div>
 
-      <div class="sidebar-section">
-        <h4>Contact</h4>
-        <ul>
-          <li><strong>Email:</strong> <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></li>
-          <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a></li>
-          <li><strong>GitHub:</strong> <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></li>
+    <div class="sidebar-section">
+      <h4>Contact</h4>
+      <ul>
+        <li><strong>Email:</strong> <a href="mailto:e.abbasifar@outlook.com">e.abbasifar@outlook.com</a></li>
+        <li><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/elnazabbasifar/" target="_blank">linkedin.com/in/elnazabbasifar</a></li>
+        <li><strong>GitHub:</strong> <a href="https://github.com/elnazabbasifar" target="_blank">github.com/elnazabbasifar</a></li>
+      </ul>
+    </div>
+
+    <div class="sidebar-section">
+      <h4>Skills</h4>
+      <ul>
+        <li><strong>Programming:</strong> Python, C#, SQL</li>
+        <li><strong>Data & ML Libraries:</strong> NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
+        <li><strong>Tools & Platforms:</strong> SQL Server, Power BI, Git, Jupyter, Visual Studio, Google Colab</li>
+      </ul>
+    </div>
+  </aside>
+
+  <!-- TOP NAV -->
+  <header class="topnav" role="navigation" aria-label="Top navigation">
+    <a href="#academic">Academic</a>
+    <a href="#publications">Publications</a>
+    <a href="#research">Research</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content" role="main">
+
+    <!-- Academic Background -->
+    <section id="academic" data-aos="fade-up">
+      <h2 class="section-title">Academic Background & Training</h2>
+      <div class="card" data-aos="zoom-in">
+        <ul class="clean">
+          <li><strong>Artificial Intelligence Autumn School</strong> (English-medium), Amirkabir University of Technology, Iran (2021)</li>
+          <li><strong>Resource-Aware Machine Learning</strong>, 5th International Summer School, TU Dortmund University, Germany (2020)</li>
+          <li><strong>Security of Things (SeThi 2020)</strong>, University of Rostock, Germany (2020)</li>
+          <li><strong>Lviv Data Science Summer School</strong>, Ukrainian Catholic University, Ukraine (2020)</li>
         </ul>
       </div>
+    </section>
 
-      <div class="sidebar-section">
-        <h4>Skills</h4>
-        <ul>
-          <li><strong>Programming:</strong> Python, C#, SQL</li>
-          <li><strong>Data & ML Libraries:</strong> NumPy, Pandas, Matplotlib, Seaborn, Scikit-learn, PyTorch Geometric</li>
-          <li><strong>Tools & Platforms:</strong> SQL Server, Power BI, Git, Jupyter, Visual Studio, Google Colab</li>
+    <!-- Publications -->
+    <section id="publications" data-aos="fade-up">
+      <h2 class="section-title">Publications</h2>
+      <div class="card pub-card" data-aos="fade-up" data-aos-delay="40">
+        <div class="pub-item">
+          <div><b>E. Abbasifar, A. Shayan</b></div>
+          <div class="muted">The Impact of Social Network Applications on Customer Trust in Small Businesses with the Mediating Role of Brand Reputation: A Structural Equations Modeling Approach (Case Study: Modiseh Online Store). 2nd International Conference on Interdisciplinary Studies in Management & Engineering, University of Tehran, 2020.</div>
+        </div>
+      </div>
+      <div class="card pub-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="pub-item">
+          <div><b>E. Abbasifar</b></div>
+          <div class="muted">New Applications of Soft Computing Technologies and Soft Data Mining in Bioinformatics: A Review. 2nd International Conference on Advances in Engineering and Basic Sciences, London, UK, 2015.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Research Experience -->
+    <section id="research" data-aos="fade-right">
+      <h2 class="section-title">Research Experience</h2>
+      <div class="card" data-aos="zoom-in" data-aos-delay="60">
+        <div style="font-weight:700">AI Researcher — Technology Studies Institute, Tehran, Iran (Feb – Sep 2021)</div>
+        <ul class="clean">
+          <li>Conducted a comparative analysis of global AI ecosystems, identifying and ranking sustainability-related indicators.</li>
+          <li>Collaborated with interdisciplinary scientists to integrate insights across computer science, policy, and management.</li>
         </ul>
       </div>
-    </aside>
+      <div class="card" data-aos="zoom-in" data-aos-delay="100">
+        <div style="font-weight:700">Graduate Researcher (Master’s Thesis) — Payame Noor University, Tehran, Iran (2016 – 2018)</div>
+        <ul class="clean">
+          <li>Conducted research on social network analysis as part of MSc thesis.</li>
+        </ul>
+      </div>
+    </section>
 
-    <!-- TOP NAV -->
-    <header class="topnav" role="navigation" aria-label="Top navigation">
-      <a href="#academic">Academic</a>
-      <a href="#publications">Publications</a>
-      <a href="#research">Research</a>
-      <a href="#certificates">Certificates</a>
-      <a href="#projects">Projects</a>
-      <a href="#work">Work</a>
-    </header>
+    <!-- Certificates (Carousel + Modal) -->
+    <section id="certificates" data-animate style="background:#eef2ff;" data-aos="fade-up">
+      <h2 class="section-title">Certificates</h2>
+      <div id="certificates-carousel">
+        <div id="certificates-carousel-track">
+          <div class="cert-carousel-item"><img src="images/cert1.jpg" alt="Certificate 1" onclick="openCertModal(this)"></div>
+          <div class="cert-carousel-item"><img src="images/cert2.jpg" alt="Certificate 2" onclick="openCertModal(this)"></div>
+          <div class="cert-carousel-item"><img src="images/cert3.jpg" alt="Certificate 3" onclick="openCertModal(this)"></div>
+          <div class="cert-carousel-item"><img src="images/cert4.jpg" alt="Certificate 4" onclick="openCertModal(this)"></div>
+          <div class="cert-carousel-item"><img src="images/cert5.jpg" alt="Certificate 5" onclick="openCertModal(this)"></div>
+        </div>
+        <button class="cert-carousel-btn left" onclick="prevCert()">‹</button>
+        <button class="cert-carousel-btn right" onclick="nextCert()">›</button>
+      </div>
 
-    <!-- MAIN CONTENT -->
-    <main class="content" role="main">
+      <!-- Modal -->
+      <div id="cert-modal" onclick="closeCertModal()">
+        <span onclick="closeCertModal()">&times;</span>
+        <img id="cert-modal-img">
+      </div>
+    </section>
 
-      <!-- Academic Background -->
-      <section id="academic" data-aos="fade-up">
-        <h2 class="section-title">Academic Background & Training</h2>
-        <div class="card" data-aos="zoom-in">
-          <ul class="clean">
-            <li><strong>Artificial Intelligence Autumn School</strong> (English-medium), Amirkabir University of Technology, Iran (2021)</li>
-            <li><strong>Resource-Aware Machine Learning</strong>, 5th International Summer School, TU Dortmund University, Germany (2020)</li>
-            <li><strong>Security of Things (SeThi 2020)</strong>, University of Rostock, Germany (2020)</li>
-            <li><strong>Lviv Data Science Summer School</strong>, Ukrainian Catholic University, Ukraine (2020)</li>
-          </ul>
-        </div>
-      </section>
+    <!-- Projects -->
+    <section id="projects" data-aos="zoom-in">
+      <h2 class="section-title">Projects</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="60">
+        <div class="project-title">Tree-Structured Graph Classification with GNN — 2025</div>
+        <div class="project-meta">A GCN using PyTorch Geometric to classify tree graphs.</div>
+        <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div class="project-title">Precision in Cardiovascular Risk Prediction: A Lasso Regression Approach — ShineTech, 2023</div>
+        <div class="project-meta">A Lasso Regression model for cardiovascular risk prediction.</div>
+        <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="140">
+        <div class="project-title">Advanced Prediction using Ensemble Learning Techniques — ShineTech, 2023</div>
+        <div class="project-meta">Mobile price prediction models using Decision Trees and Random Forest.</div>
+        <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="180">
+        <div class="project-title">EDA Seattle Area Traffic Collision Data — Data Circles, 2020</div>
+        <div class="project-meta">During Data Circles workshop, we analyzed Seattle traffic collision data to help prioritize road improvements and prevent future collisions through Exploratory Data Analysis (EDA).</div>
+        <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
+      </div>
+    </section>
 
-      <!-- Publications -->
-      <section id="publications" data-aos="fade-up">
-        <h2 class="section-title">Publications</h2>
-        <div class="card pub-card" data-aos="fade-up" data-aos-delay="40">
-          <div class="pub-item">
-            <div><b>E. Abbasifar, A. Shayan</b></div>
-            <div class="muted">The Impact of Social Network Applications on Customer Trust in Small Businesses with the Mediating Role of Brand Reputation: A Structural Equations Modeling Approach (Case Study: Modiseh Online Store). 2nd International Conference on Interdisciplinary Studies in Management & Engineering, University of Tehran, 2020.</div>
-          </div>
-        </div>
-        <div class="card pub-card" data-aos="fade-up" data-aos-delay="80">
-          <div class="pub-item">
-            <div><b>E. Abbasifar</b></div>
-            <div class="muted">New Applications of Soft Computing Technologies and Soft Data Mining in Bioinformatics: A Review. 2nd International Conference on Advances in Engineering and Basic Sciences, London, UK, 2015.</div>
-          </div>
-        </div>
-      </section>
+    <!-- Work Experience -->
+    <section id="work" data-aos="fade-right">
+      <h2 class="section-title">Work Experience</h2>
+      <div class="card" data-aos="fade-up" data-aos-delay="60">
+        <div style="font-weight:700">BPM Data Analyst — Pegah Aftab, Tehran, Iran (Apr 2021 – Present)</div>
+        <ul class="clean">
+          <li>Designed and implemented business processes and UI components using C# and React.</li>
+          <li>Analyzed workflows and authored technical documentation to support process optimization.</li>
+        </ul>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="100">
+        <div style="font-weight:700">BI Developer — Pegah Aftab, Tehran, Iran (Jun – Dec 2024)</div>
+        <ul class="clean">
+          <li>Developed interactive dashboards in Power BI to visualize key performance metrics and support decision-making.</li>
+        </ul>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="140">
+        <div style="font-weight:700">Data Science Intern (Python) — T25 Company, Tehran, Iran (Nov 2020 – Jan 2021)</div>
+        <ul class="clean">
+          <li>Developed Python scripts to automate data collection, processing, and analysis.</li>
+        </ul>
+      </div>
+      <div class="card" data-aos="fade-up" data-aos-delay="180">
+        <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Esfahan, Iran (2014 – 2017)</div>
+        <ul class="clean">
+          <li>Supervised a 9-member development team in optimizing processes and workflows.</li>
+          <li>Implemented SQL queries to automate workflows and support data-driven decision-making.</li>
+        </ul>
+      </div>
+    </section>
 
-      <!-- Research Experience -->
-      <section id="research" data-aos="fade-right">
-        <h2 class="section-title">Research Experience</h2>
-        <div class="card" data-aos="zoom-in" data-aos-delay="60">
-          <div style="font-weight:700">AI Researcher — Technology Studies Institute, Tehran, Iran (Feb – Sep 2021)</div>
-          <ul class="clean">
-            <li>Conducted a comparative analysis of global AI ecosystems, identifying and ranking sustainability-related indicators.</li>
-            <li>Collaborated with interdisciplinary scientists to integrate insights across computer science, policy, and management.</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="zoom-in" data-aos-delay="100">
-          <div style="font-weight:700">Graduate Researcher (Master’s Thesis) — Payame Noor University, Tehran, Iran (2016 – 2018)</div>
-          <ul class="clean">
-            <li>Conducted research on social network analysis as part of MSc thesis.</li>
-          </ul>
-        </div>
-      </section>
+  </main>
+</div>
 
-      <!-- Certificates -->
-      <section id="certificates" data-aos="fade-up">
-        <h2 class="section-title">Certificates</h2>
-        <div class="cert-gallery" style="display:flex; flex-direction:column; gap:16px; max-width:600px; margin:0 auto;">
-          <img src="images/cert1.jpg" alt="Certificate 1" onclick="openModal(this)">
-          <img src="images/cert2.jpg" alt="Certificate 2" onclick="openModal(this)">
-          <img src="images/cert3.jpg" alt="Certificate 3" onclick="openModal(this)">
-          <img src="images/cert4.jpg" alt="Certificate 4" onclick="openModal(this)">
-          <img src="images/cert5.jpg" alt="Certificate 5" onclick="openModal(this)">
-        </div>
-      </section>
+<script>
+  // Scroll animation
+  function scrollAnimation() {
+    const elements = document.querySelectorAll('[data-animate]');
+    const triggerBottom = window.innerHeight * 0.85;
+    elements.forEach(el => {
+      const boxTop = el.getBoundingClientRect().top;
+      if(boxTop < triggerBottom) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', scrollAnimation);
+  window.addEventListener('load', scrollAnimation);
 
-      <!-- Projects -->
-      <section id="projects" data-aos="zoom-in">
-        <h2 class="section-title">Projects</h2>
-        <div class="card" data-aos="fade-up" data-aos-delay="60">
-          <div class="project-title">Tree-Structured Graph Classification with GNN — 2025</div>
-          <div class="project-meta">A GCN using PyTorch Geometric to classify tree graphs.</div>
-          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-          <div class="project-title">Precision in Cardiovascular Risk Prediction: A Lasso Regression Approach — ShineTech, 2023</div>
-          <div class="project-meta">A Lasso Regression model for cardiovascular risk prediction.</div>
-          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="140">
-          <div class="project-title">Advanced Prediction using Ensemble Learning Techniques — ShineTech, 2023</div>
-          <div class="project-meta">Mobile price prediction models using Decision Trees and Random Forest.</div>
-          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="180">
-          <div class="project-title">EDA Seattle Area Traffic Collision Data — Data Circles, 2020</div>
-          <div class="project-meta">During Data Circles workshop, we analyzed Seattle traffic collision data to help prioritize road improvements and prevent future collisions through Exploratory Data Analysis (EDA).</div>
-          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
-        </div>
-      </section>
+  // Certificates Carousel
+  const certTrack = document.getElementById('certificates-carousel-track');
+  let certIndex = 0;
+  function updateCertCarousel(){
+    certTrack.style.transform = `translateX(-${certIndex*100}%)`;
+  }
+  function prevCert(){
+    certIndex = (certIndex === 0 ? certTrack.children.length-1 : certIndex-1);
+    updateCertCarousel();
+  }
+  function nextCert(){
+    certIndex = (certIndex === certTrack.children.length-1 ? 0 : certIndex+1);
+    updateCertCarousel();
+  }
+  setInterval(()=>{ nextCert(); },5000);
 
-      <!-- Work Experience -->
-      <section id="work" data-aos="fade-right">
-        <h2 class="section-title">Work Experience</h2>
-        <div class="card" data-aos="fade-up" data-aos-delay="60">
-          <div style="font-weight:700">BPM Data Analyst — Pegah Aftab, Tehran, Iran (Apr 2021 – Present)</div>
-          <ul class="clean">
-            <li>Designed and implemented business processes and UI components using C# and React.</li>
-            <li>Analyzed workflows and authored technical documentation to support process optimization.</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="100">
-          <div style="font-weight:700">BI Developer — Pegah Aftab, Tehran, Iran (Jun – Dec 2024)</div>
-          <ul class="clean">
-            <li>Developed interactive dashboards in Power BI to visualize key performance metrics and support decision-making.</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="140">
-          <div style="font-weight:700">Data Science Intern (Python) — T25 Company, Tehran, Iran (Nov 2020 – Jan 2021)</div>
-          <ul class="clean">
-            <li>Developed Python scripts to automate data collection, processing, and analysis.</li>
-          </ul>
-        </div>
-        <div class="card" data-aos="fade-up" data-aos-delay="180">
-          <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Esfahan, Iran (2014 – 2017)</div>
-          <ul class="clean">
-            <li>Supervised a 9-member development team in optimizing processes and workflows.</li>
-            <li>Implemented SQL queries to automate workflows and support data-driven decision-making.</li>
-          </ul>
-        </div>
-      </section>
+  // Modal
+  const certModal = document.getElementById('cert-modal');
+  const certModalImg = document.getElementById('cert-modal-img');
+  function openCertModal(img){
+    certModal.style.display = 'flex';
+    certModalImg.src = img.src;
+  }
+  function closeCertModal(){
+    certModal.style.display = 'none';
+  }
 
-    </main>
-  </div>
+</script>
 
-  <!-- Modal for full-size certificate image -->
-  <div id="imgModal">
-    <span onclick="closeModal()">&times;</span>
-    <img id="modalImage" alt="Full-size certificate">
-  </div>
-
-  <script>
-    // Scroll animation
-    function scrollAnimation() {
-      const elements = document.querySelectorAll('[data-animate]');
-      const triggerBottom = window.innerHeight * 0.85;
-      elements.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if(boxTop < triggerBottom) el.classList.add('active');
-      });
-    }
-    window.addEventListener('scroll', scrollAnimation);
-    window.addEventListener('load', scrollAnimation);
-
-    // Modal functions for certificates
-    function openModal(imgElement) {
-      const modal = document.getElementById("imgModal");
-      modal.style.display = "flex";
-      document.getElementById("modalImage").src = imgElement.src;
-    }
-    function closeModal() {
-      document.getElementById("imgModal").style.display = "none";
-    }
-  </script>
-
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({duration:600,once:true});
-  </script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init({duration:800, once:true});
+</script>
 
 </body>
 </html>

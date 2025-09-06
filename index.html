@@ -316,69 +316,32 @@
     </main>
   </div>
 
-  <!-- AOS + Certificates carousel script -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({ duration:900, once:true, easing:'ease-out-cubic' });
+  // Scroll animation
+  function scrollAnimation() {
+    const elements = document.querySelectorAll('[data-animate]');
+    const triggerBottom = window.innerHeight * 0.85;
+    elements.forEach(el => {
+      const boxTop = el.getBoundingClientRect().top;
+      if(boxTop < triggerBottom) el.classList.add('active');
+    });
+  }
+  window.addEventListener('scroll', scrollAnimation);
+  window.addEventListener('load', scrollAnimation);
   
-    (function(){
-      const wrap = document.querySelector('.carousel-wrap');
-      const track = wrap?.querySelector('.carousel-track');
-      if(!wrap || !track) return;
+  // Carousel
+  const track = document.getElementById('track');
+  const prev = document.getElementById('prev');
+  const next = document.getElementById('next');
+  const items = track.children;
+  let index = 0;
   
-      const items = Array.from(track.children);
-      let index = 0;
-      let timer = null;
-  
-      function showSlide(i){
-        const item = items[i];
-        // center the item inside the visible wrap
-        const offset = item.offsetLeft - Math.max(0, (wrap.clientWidth - item.offsetWidth)/2);
-        track.style.transform = `translateX(-${offset}px)`;
-      }
-  
-      function startAuto(){
-        stopAuto();
-        timer = setInterval(()=>{
-          index = (index + 1) % items.length;
-          showSlide(index);
-        }, 3000);
-      }
-  
-      function stopAuto(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-  
-      // Controls
-      const prevBtn = document.querySelector('.carousel-btn.prev');
-      const nextBtn = document.querySelector('.carousel-btn.next');
-  
-      prevBtn?.addEventListener('click', () => {
-        stopAuto();
-        index = (index - 1 + items.length) % items.length;
-        showSlide(index);
-        startAuto();
-      });
-  
-      nextBtn?.addEventListener('click', () => {
-        stopAuto();
-        index = (index + 1) % items.length;
-        showSlide(index);
-        startAuto();
-      });
-  
-      // Pause on hover
-      wrap.addEventListener('mouseenter', stopAuto);
-      wrap.addEventListener('mouseleave', startAuto);
-  
-      // init after images/layout ready
-      window.addEventListener('load', () => {
-        // make sure first slide centered
-        showSlide(index);
-        startAuto();
-      });
-      window.addEventListener('resize', () => showSlide(index));
-    })();
+  function updateCarousel() {
+    track.style.transform = `translateX(-${index*260}px)`;
+  }
+  prev.addEventListener('click', () => { index = (index===0?items.length-1:index-1); updateCarousel(); });
+  next.addEventListener('click', () => { index = (index===items.length-1?0:index+1); updateCarousel(); });
+  setInterval(()=>{ index = (index+1)%items.length; updateCarousel(); }, 3000);
   </script>
 
 </body>

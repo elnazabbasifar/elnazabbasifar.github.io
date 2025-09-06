@@ -94,28 +94,16 @@
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
 
-    /* Certificates carousel (one-by-one slider with controls) */
-    .carousel-wrap { position: relative; overflow: hidden; }
-    .carousel-track { display:flex; gap:12px; transition: transform 0.6s cubic-bezier(.22,.9,.28,1); will-change: transform; padding:8px 0; }
-    .carousel-item { min-width: 100%; flex: 0 0 100%; display:flex; justify-content:center; align-items:center; box-sizing:border-box; }
-    .carousel-item .cert { width:100%; height:220px; display:flex; align-items:center; justify-content:center; border-radius:10px; overflow:hidden; }
-    .carousel-item img{ width:100%; height:100%; object-fit:cover; display:block; }
-    
-    /* controls */
-    .carousel-btn {
-      position:absolute; top:50%; transform:translateY(-50%);
-      background:var(--accent); color:#fff; border:none; width:40px; height:40px; border-radius:50%;
-      display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:20px; box-shadow:0 6px 18px rgba(2,6,23,0.12);
-    }
-    .carousel-btn.prev { left:10px; }
-    .carousel-btn.next { right:10px; }
-    .carousel-btn:focus{outline:none; box-shadow:0 0 0 4px rgba(30,64,175,0.12);}
-    
-    /* desktop: show narrower item so next peeks */
-    @media(min-width:800px){
-      .carousel-item { min-width: 70%; flex: 0 0 70%; }
-      .carousel-track { padding-left: calc((100% - 70%)/2); } /* center first item */
-    }
+    /* Carousel */
+    .carousel { position:relative; overflow:hidden; max-width:900px; margin:0 auto; }
+    .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
+    .carousel-item { flex:0 0 260px; margin-right:1rem; border-radius:8px; overflow:hidden; }
+    .carousel-item img { width:100%; height:180px; object-fit:cover; transition:0.3s; }
+    .carousel-item img:hover { transform:scale(1.05); }
+    .carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:#2563eb; color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer; font-size:1.5rem; transition:0.3s; }
+    .carousel-btn:hover { background:#1d4ed8; }
+    .carousel-btn.left { left:10px; }
+    .carousel-btn.right { right:10px; }
   
     /* Responsive */
     @media (max-width:900px){
@@ -228,13 +216,12 @@
         <h2 class="section-title">Certificates</h2>
       
         <div class="card" data-aos="zoom-in" data-aos-delay="80">
-          <div class="carousel-wrap" aria-hidden="false">
-            <div class="carousel-track">
-              <div class="carousel-item cert"><img src="https://drive.google.com/uc?id=1fajJqKMRTLMAdHdBuIze6jkX7i3soVur" alt="Certificate" style="max-width:100%; height:auto;"></div>
-              <div class="carousel-item cert"><img src="https://via.placeholder.com/360x220?text=Cert+2" alt="Certificate 2"></div>
-              <div class="carousel-item cert"><img src="https://via.placeholder.com/360x220?text=Cert+3" alt="Certificate 3"></div>
-
-            </div>
+          <div class="carousel" id="carousel">
+          <div class="carousel-track" id="track">
+            <div class="carousel-item"><img src="https://drive.google.com/uc?id=1kdWuoe8-by-H8GenAK3H6iF_mSA3WexU/view?usp=sharing" alt="Certificate 1"></div>
+            <div class="carousel-item"><img src="cert2.jpg" alt="Certificate 2"></div>
+            <div class="carousel-item"><img src="cert3.jpg" alt="Certificate 3"></div>
+          </div>
       
             <!-- controls -->
             <button class="carousel-btn prev" aria-label="Previous">‹</button>

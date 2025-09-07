@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elnaz Abbasifar</title>
+  <title>Elnaz Abbasifar — Portfolio</title>
 
   <!-- AOS CSS (Animate On Scroll) -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -25,7 +25,7 @@
     /* ---------- Layout ---------- */
     .layout{display:flex;min-height:100vh;}
 
-    /* ---------- Sidebar (Professional) ---------- */
+    /* ---------- Sidebar ---------- */
     .sidebar{
       width:280px;
       background:var(--sidebar-bg);
@@ -63,7 +63,7 @@
     .sidebar::-webkit-scrollbar-thumb{background-color:rgba(107,114,128,0.5);border-radius:3px;}
     .sidebar::-webkit-scrollbar-track{background:transparent;}
 
-    /* ---------- Top Navbar (outside sidebar) ---------- */
+    /* ---------- Top Navbar ---------- */
     .topnav{
       position:fixed; left:280px; right:0; top:0;
       height:56px; background:#ffffff;
@@ -103,45 +103,33 @@
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
 
-    /* Responsive */
+    /* ---------- Certificates Carousel ---------- */
+    .carousel { position:relative; overflow:hidden; max-width:700px; margin:0 auto; }
+    .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
+    .carousel-item { flex:0 0 100%; display:flex; justify-content:center; }
+    .carousel-item img { max-width:90%; max-height:420px; object-fit:contain; border-radius:8px; cursor:pointer; }
+    .carousel-btn { 
+      position:absolute; top:50%; transform:translateY(-50%); 
+      background:rgba(0,0,0,0.5); color:white; border:none; 
+      width:40px; height:40px; border-radius:50%; 
+      cursor:pointer; font-size:1.5rem; line-height:1;
+      transition:0.3s; display:flex; align-items:center; justify-content:center;
+    }
+    .carousel-btn:hover { background:rgba(0,0,0,0.7); }
+    .carousel-btn.left { left:10px; }
+    .carousel-btn.right { right:10px; }
+
+    /* ---------- Modal ---------- */
+    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:100; }
+    .modal img { max-width:90%; max-height:90%; border-radius:8px; }
+    .modal-close { position:absolute; top:20px; right:30px; color:#fff; font-size:2rem; cursor:pointer; }
+
+    /* ---------- Responsive ---------- */
     @media (max-width:900px){
       .sidebar{display:none}
       .topnav{left:0;width:100%}
       .content{margin-left:0;padding:100px 18px 40px}
     }
-    
-    /* ---------- Certificates Carousel ---------- */
-    #certificates-carousel{position:relative; max-width:800px; margin:0 auto; overflow:hidden; background:transparent; border-radius:12px;}
-    #certificates-carousel-track{display:flex; transition:transform 0.5s ease-in-out;}
-    .cert-carousel-item{flex:0 0 100%; display:flex; justify-content:center; align-items:center; padding:12px;}
-    .cert-carousel-item img{max-width:100%; max-height:400px; object-fit:contain; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.15); cursor:pointer; transition:0.3s;}
-    .cert-carousel-item img:hover{transform:scale(1.02);}
-
-    .cert-carousel-btn{
-      position:absolute; top:50%; transform:translateY(-50%);
-      background:rgba(255,255,255,0.85); 
-      color:var(--accent); 
-      border:none; 
-      padding:12px; 
-      border-radius:50%; 
-      cursor:pointer; 
-      font-size:1.8rem; 
-      box-shadow:0 4px 12px rgba(0,0,0,0.2);
-      transition:all 0.25s ease-in-out;
-      display:flex; align-items:center; justify-content:center;
-    }
-    .cert-carousel-btn:hover{
-      background:var(--accent);
-      color:white;
-      transform:translateY(-50%) scale(1.1);
-    }
-    .cert-carousel-btn.left{left:10px;}
-    .cert-carousel-btn.right{right:10px;}
-
-    /* Modal */
-    #cert-modal{display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); justify-content:center; align-items:center; z-index:1000;}
-    #cert-modal img{max-width:90%; max-height:90%; border-radius:8px; box-shadow:0 8px 22px rgba(0,0,0,0.25);}
-    #cert-modal span{position:absolute; top:20px; right:28px; font-size:2.5rem; color:white; cursor:pointer;}
   </style>
 </head>
 <body>
@@ -152,7 +140,7 @@
       <div class="sidebar-header">
         <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
         <div class="name">Elnaz Abbasifar</div>
-        <p>PhD Applicant | Machine Learning | Multimodal Data Analytics  | Health Informatics<br></p>
+        <p>PhD Applicant | Machine Learning | Data Management | Health Informatics<br></p>
         <div class="title">M.Sc. in IT Management (Advanced Information Systems)<br>B.Sc. Computer Engineering (Software)</div>
       </div>
 
@@ -236,27 +224,27 @@
         </div>
       </section>
 
-      <!-- Certificates Section -->
-      <section id="certificates" data-animate data-aos="fade-up">
+      <!-- Certificates (Carousel + Modal) -->
+      <section id="certificates" data-aos="fade-up">
         <h2 class="section-title">Certificates</h2>
-        <div id="certificates-carousel">
-          <div id="certificates-carousel-track">
-            <div class="cert-carousel-item"><img src="images/cert1.jpg" alt="Certificate 1" loading="lazy" onclick="openCertModal(this)"></div>
-            <div class="cert-carousel-item"><img src="images/cert2.jpg" alt="Certificate 2" loading="lazy" onclick="openCertModal(this)"></div>
-            <div class="cert-carousel-item"><img src="images/cert3.jpg" alt="Certificate 3" loading="lazy" onclick="openCertModal(this)"></div>
-            <div class="cert-carousel-item"><img src="images/cert4.jpg" alt="Certificate 4" loading="lazy" onclick="openCertModal(this)"></div>
-            <div class="cert-carousel-item"><img src="images/cert5.jpg" alt="Certificate 5" loading="lazy" onclick="openCertModal(this)"></div>
+        <div class="carousel" id="carousel">
+          <div class="carousel-track" id="track">
+            <div class="carousel-item"><img src="images/cert1.jpg" loading="lazy" alt="Certificate 1" onclick="openModal(this)"></div>
+            <div class="carousel-item"><img src="images/cert2.jpg" loading="lazy" alt="Certificate 2" onclick="openModal(this)"></div>
+            <div class="carousel-item"><img src="images/cert3.jpg" loading="lazy" alt="Certificate 3" onclick="openModal(this)"></div>
+            <div class="carousel-item"><img src="images/cert4.jpg" loading="lazy" alt="Certificate 4" onclick="openModal(this)"></div>
+            <div class="carousel-item"><img src="images/cert5.jpg" loading="lazy" alt="Certificate 5" onclick="openModal(this)"></div>
           </div>
-          <button class="cert-carousel-btn left" onclick="prevCert()">&#10094;</button>
-          <button class="cert-carousel-btn right" onclick="nextCert()">&#10095;</button>
-        </div>
-
-        <!-- Modal -->
-        <div id="cert-modal" onclick="closeCertModal()">
-          <span onclick="closeCertModal()">&times;</span>
-          <img id="cert-modal-img">
+          <button id="prev" class="carousel-btn left" aria-label="Previous">‹</button>
+          <button id="next" class="carousel-btn right" aria-label="Next">›</button>
         </div>
       </section>
+
+      <!-- Modal -->
+      <div id="imgModal" class="modal">
+        <span class="modal-close" onclick="closeModal()">&times;</span>
+        <img id="modalImage" alt="Full Size">
+      </div>
 
       <!-- Projects -->
       <section id="projects" data-aos="zoom-in">
@@ -264,22 +252,22 @@
         <div class="card" data-aos="fade-up" data-aos-delay="60">
           <div class="project-title">Tree-Structured Graph Classification with GNN — 2025</div>
           <div class="project-meta">A GCN using PyTorch Geometric to classify tree graphs.</div>
-          <div class="project-link"><a href="https://github.com/elnazabbasifar/GCN-Tree-Classification" target="_blank">GitHub Project Link</a></div>
+          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="100">
           <div class="project-title">Precision in Cardiovascular Risk Prediction: A Lasso Regression Approach — ShineTech, 2023</div>
           <div class="project-meta">A Lasso Regression model for cardiovascular risk prediction.</div>
-          <div class="project-link"><a href="https://github.com/elnazabbasifar/Heart-Disease-Prediction-using-Lasso-Regression" target="_blank">GitHub Project Link</a></div>
+          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="140">
           <div class="project-title">Advanced Prediction using Ensemble Learning Techniques — ShineTech, 2023</div>
           <div class="project-meta">Mobile price prediction models using Decision Trees and Random Forest.</div>
-          <div class="project-link"><a href="https://github.com/elnazabbasifar/Mobile-Price-Prediction-using-DT-and-RF?utm_source=chatgpt.com" target="_blank">GitHub Project Link</a></div>
+          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="180">
           <div class="project-title">EDA Seattle Area Traffic Collision Data — Data Circles, 2020</div>
           <div class="project-meta">During Data Circles workshop, we analyzed Seattle traffic collision data to help prioritize road improvements and prevent future collisions through Exploratory Data Analysis (EDA).</div>
-          <div class="project-link"><a href="https://github.com/elnazabbasifar/Traffic-Collisions-Team-Project" target="_blank">GitHub Project Link</a></div>
+          <div class="project-link"><a href="#" target="_blank">GitHub Project Link</a></div>
         </div>
       </section>
 
@@ -309,56 +297,38 @@
           <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Esfahan, Iran (2014 – 2017)</div>
           <ul class="clean">
             <li>Supervised a 9-member development team in optimizing processes and workflows.</li>
-            <li>Implemented SQL queries to automate workflows and support data-driven decision-making.</li>
+            <li>Designed dashboards and data visualizations for managers and stakeholders.</li>
+            <li>Developed BPM components and managed SQL Server databases for process automation.</li>
           </ul>
         </div>
       </section>
-
     </main>
   </div>
 
-  <script>
-    // Scroll animation
-    function scrollAnimation() {
-      const elements = document.querySelectorAll('[data-animate]');
-      const triggerBottom = window.innerHeight * 0.85;
-      elements.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if(boxTop < triggerBottom) el.classList.add('active');
-      });
-    }
-    window.addEventListener('scroll', scrollAnimation);
-    window.addEventListener('load', scrollAnimation);
-
-    // Certificates Carousel Logic
-    const certTrack = document.getElementById('certificates-carousel-track');
-    const certItems = certTrack.children;
-    let certIndex = 0;
-
-    function updateCertCarousel() {
-      certTrack.style.transform = `translateX(-${certIndex*100}%)`;
-    }
-
-    function prevCert() { certIndex = (certIndex===0?certItems.length-1:certIndex-1); updateCertCarousel(); }
-    function nextCert() { certIndex = (certIndex===certItems.length-1?0:certIndex+1); updateCertCarousel(); }
-    setInterval(()=>{ certIndex = (certIndex+1)%certItems.length; updateCertCarousel(); },5000);
-
-    // Modal Logic
-    const certModal = document.getElementById('cert-modal');
-    const certModalImg = document.getElementById('cert-modal-img');
-    function openCertModal(img){
-      certModal.style.display='flex';
-      certModalImg.src = img.src;
-    }
-    function closeCertModal(){
-      certModal.style.display='none';
-    }
-  </script>
-
+  <!-- JS for AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init({duration:800, once:true});
-  </script>
+  <script>AOS.init();</script>
 
+  <!-- JS for Carousel & Modal -->
+  <script>
+    // Carousel functionality
+    const track=document.getElementById('track');
+    const items=document.querySelectorAll('.carousel-item');
+    const prevBtn=document.getElementById('prev');
+    const nextBtn=document.getElementById('next');
+    let index=0;
+    function updateCarousel(){
+      track.style.transform='translateX(' + (-index*100) + '%)';
+    }
+    prevBtn.addEventListener('click',()=>{ index=(index>0)?index-1:items.length-1; updateCarousel(); });
+    nextBtn.addEventListener('click',()=>{ index=(index<items.length-1)?index+1:0; updateCarousel(); });
+
+    // Modal functionality
+    const modal=document.getElementById('imgModal');
+    const modalImg=document.getElementById('modalImage');
+    function openModal(el){ modal.style.display='flex'; modalImg.src=el.src; }
+    function closeModal(){ modal.style.display='none'; }
+    window.addEventListener('click',(e)=>{ if(e.target==modal) closeModal(); });
+  </script>
 </body>
 </html>

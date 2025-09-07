@@ -360,12 +360,32 @@
     AOS.init({once:true, duration:600});
   </script>
 
+  <!-- Scroll to top on refresh + smooth scroll -->
   <script>
-    // Scroll to top on page load
+    // 1. Scroll to top on page load (fix refresh scroll issue)
     window.addEventListener('load', () => {
-      window.scrollTo(0, 0);
+      setTimeout(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      }, 50);
+    });
+
+    // 2. Smooth scroll for menu links
+    const menuLinks = document.querySelectorAll('a[href^="#"]');
+    menuLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href').substring(1);
+        const targetEl = document.getElementById(targetId);
+        if (targetEl) {
+          const topOffset = targetEl.getBoundingClientRect().top + window.scrollY - 70;
+          window.scrollTo({ top: topOffset, behavior: 'smooth' });
+        }
+      });
     });
   </script>
+
+</body>
+
 
 </body>
 </html>

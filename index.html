@@ -23,16 +23,18 @@
     a:hover{text-decoration:underline}
 
     /* ---------- Layout ---------- */
-    .layout{display:flex;min-height:100vh;flex-wrap:wrap;}
+    .layout{display:flex;min-height:100vh;flex-direction:row;}
 
     /* ---------- Sidebar ---------- */
     .sidebar{
       width:280px;
       background:var(--sidebar-bg);
       padding:30px 20px;
+      position:fixed;
+      left:0; top:0; bottom:0;
+      overflow-y:auto;
       border-right:1px solid #d1d5db;
       color:var(--text);
-      flex-shrink:0;
     }
     .sidebar-header{text-align:center;margin-bottom:30px;}
     .sidebar-header .photo{
@@ -57,26 +59,27 @@
     .sidebar-section ul li{margin-bottom:8px;font-size:0.95rem;line-height:1.5;color:var(--text);}
     .sidebar-section ul li a{color:#4b5563;text-decoration:none;}
     .sidebar-section ul li a:hover{color:var(--accent);text-decoration:underline;}
+    .sidebar::-webkit-scrollbar{width:6px;}
+    .sidebar::-webkit-scrollbar-thumb{background-color:rgba(107,114,128,0.5);border-radius:3px;}
+    .sidebar::-webkit-scrollbar-track{background:transparent;}
 
     /* ---------- Top Navbar ---------- */
     .topnav{
-      position:sticky; top:0;
+      position:fixed; left:280px; right:0; top:0;
       height:56px; background:#ffffff;
       border-bottom:1px solid rgba(0,0,0,0.04);
-      display:flex; align-items:center; gap:12px;
+      display:flex; align-items:center; gap:18px;
       padding:0 28px; z-index:40;
       overflow-x:auto;
-      scrollbar-width:none;
     }
-    .topnav::-webkit-scrollbar{display:none;}
     .topnav a{color:var(--text); font-weight:600; padding:6px 10px; border-radius:6px; transition:all .18s; text-decoration:none; white-space:nowrap;}
     .topnav a:hover{color:var(--accent); background:rgba(30,64,175,0.04)}
 
     /* ---------- Content ---------- */
     .content{
-      flex:1;
+      margin-left:280px;
       padding:90px 40px 60px 40px; 
-      min-width:0;
+      width:calc(100% - 280px);
     }
     section{margin-bottom:34px}
     h2.section-title{font-size:1.1rem;color:#444444;margin:0 0 12px;font-weight:700}
@@ -101,32 +104,34 @@
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
 
-    /* Carousel */
+    /* Certificates carousel */
     .carousel { position:relative; overflow:hidden; max-width:900px; margin:0 auto; }
     .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
     .carousel-item { flex:0 0 260px; margin-right:1rem; border-radius:8px; overflow:hidden; cursor:pointer; }
     .carousel-item img { width:100%; height:180px; object-fit:cover; transition:0.3s; display:block; }
     .carousel-item img:hover { transform:scale(1.05); }
-
     .carousel-btn { position:absolute; top:50%; transform:translateY(-50%); background:#6b7280; color:white; border:none; padding:8px 12px; border-radius:50%; cursor:pointer; font-size:1.5rem; transition:0.3s; z-index:10; }
     .carousel-btn:hover { background:#4b5563; }
     .carousel-btn.left { left:10px; }
     .carousel-btn.right { right:10px; }
 
-    /* Modal for certificate view */
-    .modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:100; }
-    .modal-content { max-width:90%; max-height:90%; border-radius:12px; overflow:hidden; }
-    .modal-content img { width:100%; height:auto; display:block; }
+    /* Modal for full certificate */
+    .modal { display:none; position:fixed; z-index:50; left:0; top:0; width:100%; height:100%; overflow:auto; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; }
+    .modal-content { max-width:90%; max-height:90%; }
+    .modal-content img { width:100%; height:auto; display:block; border-radius:8px; }
 
     /* Responsive adjustments */
     @media (max-width:900px){
       .layout{flex-direction:column;}
-      .sidebar{width:100%; position:relative; border-right:none; padding:20px;}
-      .content{padding:20px;}
-      .carousel { max-width:100%; }
-      .carousel-track { gap:0.5rem; }
-      .carousel-item { flex:0 0 70%; margin-right:0.5rem; }
-      .carousel-btn { display:none; }
+      .sidebar{position:relative;width:100%;border-right:none;border-bottom:1px solid #d1d5db; padding:18px;}
+      .topnav{position:relative; left:0; top:0; width:100%; padding:12px 18px; border-bottom:1px solid #d1d5db; overflow-x:auto;}
+      .content{margin-left:0; padding:20px 18px;}
+      
+      /* Certificates mobile: show one at a time vertically */
+      .carousel { max-width:100%; overflow:visible; }
+      .carousel-track { flex-direction:column; transform:none !important; }
+      .carousel-item { flex:1 0 auto; margin:0 0 18px 0; }
+      .carousel-btn { display:none; } /* hide buttons on mobile */
     }
   </style>
 </head>
@@ -227,11 +232,11 @@
         <h2 class="section-title">Certificates</h2>
         <div class="carousel" id="carousel">
           <div class="carousel-track" id="track">
-            <div class="carousel-item"><img src="images/cert1.jpg" alt="Certificate 1" loading="lazy"></div>
-            <div class="carousel-item"><img src="images/cert2.jpg" alt="Certificate 2" loading="lazy"></div>
-            <div class="carousel-item"><img src="images/cert3.jpg" alt="Certificate 3" loading="lazy"></div>
-            <div class="carousel-item"><img src="images/cert4.jpg" alt="Certificate 4" loading="lazy"></div>
-            <div class="carousel-item"><img src="images/cert5.jpg" alt="Certificate 5" loading="lazy"></div>
+            <div class="carousel-item"><img src="images/cert1.jpg" alt="Certificate 1"></div>
+            <div class="carousel-item"><img src="images/cert2.jpg" alt="Certificate 2"></div>
+            <div class="carousel-item"><img src="images/cert3.jpg" alt="Certificate 3"></div>
+            <div class="carousel-item"><img src="images/cert4.jpg" alt="Certificate 4"></div>
+            <div class="carousel-item"><img src="images/cert5.jpg" alt="Certificate 5"></div>
           </div>
           <button id="prev" class="carousel-btn left" aria-label="Previous">‹</button>
           <button id="next" class="carousel-btn right" aria-label="Next">›</button>
@@ -286,10 +291,9 @@
           </ul>
         </div>
         <div class="card" data-aos="fade-up" data-aos-delay="180">
-          <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Esfahan, Iran (2014 – 2017)</div>
+          <div style="font-weight:700">SQL Developer / BPM Developer — Payam Mashregh, Tehran, Iran (2017 – 2018)</div>
           <ul class="clean">
-            <li>Supervised a 9-member development team in optimizing processes and workflows.</li>
-            <li>Implemented SQL queries to automate workflows and support data-driven decision-making.</li>
+            <li>Designed SQL stored procedures and BPM workflows for enterprise solutions.</li>
           </ul>
         </div>
       </section>
@@ -298,54 +302,41 @@
   </div>
 
   <!-- Certificate Modal -->
-  <div id="modal" class="modal">
-    <div class="modal-content"><img src="" alt="Certificate"></div>
+  <div class="modal" id="modal">
+    <div class="modal-content"><img src="" alt="Certificate Full View"></div>
   </div>
 
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Scroll animation
-    function scrollAnimation() {
-      const elements = document.querySelectorAll('[data-animate]');
-      const triggerBottom = window.innerHeight / 5 * 4;
+    AOS.init({duration:800,once:true});
 
-      elements.forEach(el => {
-        const boxTop = el.getBoundingClientRect().top;
-        if(boxTop < triggerBottom) {
-          el.classList.add('aos-animate');
-        } else {
-          el.classList.remove('aos-animate');
-        }
-      });
-    }
-    window.addEventListener('scroll', scrollAnimation);
-    window.addEventListener('load', scrollAnimation);
-
-    // Certificates carousel
+    // ---------- Carousel logic ----------
     const track = document.getElementById('track');
-    const prev = document.getElementById('prev');
-    const next = document.getElementById('next');
+    const items = track.children;
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
     let index = 0;
 
     function updateCarousel() {
-      track.style.transform = `translateX(-${index*260}px)`;
+      const width = items[0].offsetWidth + 16; // item width + margin
+      track.style.transform = `translateX(${-index*width}px)`;
     }
-    prev.addEventListener('click', ()=>{ index = Math.max(index-1,0); updateCarousel(); });
-    next.addEventListener('click', ()=>{ index = Math.min(index+1,track.children.length-4); updateCarousel(); });
 
-    // Certificate modal
+    prevBtn.addEventListener('click', () => { index = Math.max(0,index-1); updateCarousel(); });
+    nextBtn.addEventListener('click', () => { index = Math.min(items.length-1,index+1); updateCarousel(); });
+    window.addEventListener('resize', () => { if(window.innerWidth>900) updateCarousel(); });
+
+    // ---------- Modal logic ----------
     const modal = document.getElementById('modal');
     const modalImg = modal.querySelector('img');
-    document.querySelectorAll('.carousel-item img').forEach(img=>{
-      img.addEventListener('click', ()=>{
-        modal.style.display = 'flex';
-        modalImg.src = img.src;
+    Array.from(items).forEach(item=>{
+      item.addEventListener('click', ()=>{
+        modal.style.display='flex';
+        modalImg.src=item.querySelector('img').src;
       });
     });
-    modal.addEventListener('click', ()=> modal.style.display = 'none');
+    modal.addEventListener('click', ()=>{modal.style.display='none';});
   </script>
-
-  <!-- AOS JS -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>AOS.init({once:true, duration:800});</script>
 </body>
 </html>

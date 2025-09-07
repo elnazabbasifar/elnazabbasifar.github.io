@@ -117,17 +117,62 @@
     #cert-modal img{max-width:90%;max-height:90%;border-radius:8px;}
     #cert-modal span{position:absolute;top:20px;right:30px;color:white;font-size:2rem;cursor:pointer;}
 
-    /* ---------- Responsive ---------- */
-    @media (max-width:900px){
-      .sidebar{position:relative;width:100%;height:auto;border:none;display:block;}
-      .topnav{left:0;}
-      .content{margin-left:0;width:100%;padding:90px 18px 40px}
-    }
-
     /* Projects */
     .project-title{font-weight:700;color:#111827;margin-bottom:6px}
     .project-meta{color:var(--muted);font-size:0.95rem;margin-bottom:8px}
     .project-link{font-weight:600;color:var(--accent);font-size:0.95rem}
+
+    /* ---------- Mobile adjustments ---------- */
+  @media (max-width: 900px){
+    /* Sidebar becomes top header */
+    .sidebar {
+      position: relative;
+      width: 100%;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid #d1d5db;
+      padding: 20px 15px;
+      display: block;
+    }
+  
+    /* Top navigation below sidebar, full width, horizontal scroll if needed */
+    .topnav {
+      position: relative;
+      left: 0;
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      padding: 10px 15px;
+    }
+    .topnav a {
+      flex: 0 0 auto;
+      margin-right: 12px;
+    }
+  
+    /* Main content full width below sidebar */
+    .content {
+      margin-left: 0;
+      padding: 20px 15px;
+      width: 100%;
+    }
+  
+    /* Certificates carousel: show one item at a time */
+    #certificates-carousel-track {
+      display: flex;
+      overflow: hidden;
+    }
+    .cert-carousel-item {
+      flex: 0 0 100%; /* show one certificate per view */
+      margin-right: 0;
+    }
+  
+    /* Optional: increase button size for touch */
+    .cert-carousel-btn {
+      padding: 10px 16px;
+      font-size: 2rem;
+    }
+  }
+  
   </style>
 </head>
 <body>

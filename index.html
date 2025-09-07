@@ -368,8 +368,8 @@
     let certIndex = 0;
 
     function updateCertCarousel() {
-      // Translate track to show only one certificate at a time
-      track.style.transform = `translateX(-${certIndex * 100}%)`;
+      const width = items[0].offsetWidth; // عرض واقعی آیتم
+      track.style.transform = `translateX(-${certIndex * width}px)`;
     }
 
     function prevCert() {

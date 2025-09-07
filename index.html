@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Elnaz Abbasifar</title>
+  <title>Elnaz Abbasifar — Portfolio</title>
 
   <!-- AOS CSS -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -36,11 +36,11 @@
       border-right:1px solid #d1d5db;
     }
     .sidebar-header{text-align:center;margin-bottom:20px;}
-    .sidebar-header .photo{
-      width:100px; height:100px;
-      border-radius:50%; object-fit:cover;
-      border:3px solid #e5e7eb;
-      margin-bottom:10px;
+    .sidebar-header .title{
+      font-size:0.95rem;
+      font-weight:600;
+      line-height:1.4;
+      color:var(--text);
     }
     .sidebar-section{margin-bottom:20px;}
     .sidebar-section h4{
@@ -80,23 +80,18 @@
     ul.clean li{margin:8px 0;line-height:1.5;color:var(--text);font-size:0.95rem}
 
     /* ---------- About Section ---------- */
-    .about-wrapper{display:flex;align-items:center;gap:30px;flex-wrap:wrap;}
-    .about-wrapper img{
-      width:160px; height:160px; border-radius:50%; object-fit:cover;
-      box-shadow:0 6px 16px rgba(0,0,0,0.1);
-    }
-    .about-text{flex:1; font-size:1rem; line-height:1.6; color:var(--text);}
+    .about-wrapper{font-size:1rem; line-height:1.6; color:var(--text);}
 
     /* ---------- Certificates Carousel ---------- */
-    .carousel { position:relative; overflow:hidden; max-width:700px; margin:0 auto; }
+    .carousel { position:relative; overflow:hidden; max-width:500px; margin:0 auto; }
     .carousel-track { display:flex; transition:transform 0.5s ease-in-out; }
     .carousel-item { flex:0 0 100%; border-radius:8px; overflow:hidden; }
-    .carousel-item img { width:100%; height:auto; object-fit:contain; cursor:pointer; }
+    .carousel-item img { width:100%; height:250px; object-fit:contain; cursor:pointer; }
 
     .carousel-btn { position:absolute; top:50%; transform:translateY(-50%); 
-      background:#374151; color:white; border:none; padding:10px; border-radius:50%; 
-      cursor:pointer; font-size:1.4rem; transition:0.3s; }
-    .carousel-btn:hover { background:#1f2937; }
+      background:#1e3a8a; color:white; border:none; padding:8px; border-radius:50%; 
+      cursor:pointer; font-size:1.2rem; transition:0.3s; box-shadow:0 3px 10px rgba(0,0,0,0.2);}
+    .carousel-btn:hover { background:#374151; }
     .carousel-btn.left { left:10px; }
     .carousel-btn.right { right:10px; }
 
@@ -112,8 +107,6 @@
       .sidebar{position:relative;width:100%;height:auto;border:none;display:block;}
       .topnav{left:0;}
       .content{margin-left:0;width:100%;padding:90px 18px 40px}
-      .about-wrapper{flex-direction:column;align-items:flex-start;}
-      .about-wrapper img{margin-bottom:15px;}
     }
   </style>
 </head>
@@ -123,7 +116,10 @@
     <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sidebar-header">
-        <img class="photo" src="images/profile.jpg" alt="Elnaz Abbasifar">
+        <div class="title">
+          M.Sc. in IT Management (Advanced Information Systems)<br>
+          B.Sc. Computer Engineering (Software)
+        </div>
       </div>
       <div class="sidebar-section">
         <h4>Contact</h4>
@@ -161,12 +157,9 @@
       <section id="about" data-aos="fade-up">
         <h2 class="section-title">About Me</h2>
         <div class="card about-wrapper">
-          <img src="images/profile.jpg" alt="Elnaz Abbasifar">
-          <div class="about-text">
-            <p>Hello! I’m <strong>Elnaz Abbasifar</strong>, passionate about <b>Machine Learning, Data Science, and Health Informatics</b>.  
-            I enjoy working on real-world problems where data and algorithms intersect with human needs.</p>
-            <p>Beyond academics, I love engaging in collaborative projects, exploring new technologies, and maintaining a dynamic and active lifestyle — qualities that keep me motivated and adaptable in every challenge.</p>
-          </div>
+          <p>Hello! I’m <strong>Elnaz Abbasifar</strong>, passionate about <b>Machine Learning, Data Science, and Health Informatics</b>.  
+          I enjoy working on real-world problems where data and algorithms intersect with human needs.</p>
+          <p>Beyond academics, I love engaging in collaborative projects, exploring new technologies, and maintaining a dynamic and active lifestyle — qualities that keep me motivated and adaptable in every challenge.</p>
         </div>
       </section>
 
@@ -188,11 +181,11 @@
         <h2 class="section-title">Publications</h2>
         <div class="card">
           <div><b>E. Abbasifar, A. Shayan</b></div>
-          <div class="muted">Impact of Social Network Applications on Customer Trust ... University of Tehran, 2020.</div>
+          <div class="muted">Impact of Social Network Applications on Customer Trust and Satisfaction: An Empirical Study on Iranian Mobile Banking Users, University of Tehran, 2020.</div>
         </div>
         <div class="card">
           <div><b>E. Abbasifar</b></div>
-          <div class="muted">New Applications of Soft Computing in Bioinformatics ... London, UK, 2015.</div>
+          <div class="muted">New Applications of Soft Computing in Bioinformatics: A Study on Protein Interaction Networks, London, UK, 2015.</div>
         </div>
       </section>
 
@@ -215,7 +208,7 @@
       </section>
 
       <!-- Certificates -->
-      <section id="certificates" data-aos="fade-up" style="background:#eef2ff;padding:20px;border-radius:12px;">
+      <section id="certificates" data-aos="fade-up">
         <h2 class="section-title">Certificates</h2>
         <div class="carousel" id="carousel">
           <div class="carousel-track" id="track">
@@ -233,7 +226,17 @@
         <h2 class="section-title">Projects</h2>
         <div class="card">
           <b>Tree-Structured Graph Classification with GNN — 2025</b>
-          <div class="muted">PyTorch Geometric for classifying tree graphs.</div>
+          <div class="muted">
+            PyTorch Geometric for classifying tree graphs.  
+            <a href="https://github.com/elnazabbasifar/TreeGNN" target="_blank">View on GitHub</a>
+          </div>
+        </div>
+        <div class="card">
+          <b>Social Network Analysis — MSc Thesis 2018</b>
+          <div class="muted">
+            Analyzed user interactions and influence within social media platforms.  
+            <a href="https://github.com/elnazabbasifar/SocialNetworkAnalysis" target="_blank">View on GitHub</a>
+          </div>
         </div>
       </section>
 
@@ -242,7 +245,16 @@
         <h2 class="section-title">Work Experience</h2>
         <div class="card">
           <b>BPM Data Analyst — Pegah Aftab, Tehran, Iran (2021–Present)</b>
-          <ul class="clean"><li>Designed and implemented business processes with C# and React.</li></ul>
+          <ul class="clean">
+            <li>Designed and implemented business processes with C# and React.</li>
+            <li>Optimized workflow automation and reporting using SQL and Power BI.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <b>Process Engineer — Mahdian Tech, Tehran, Iran (2018–2021)</b>
+          <ul class="clean">
+            <li>Managed BPMS implementation and workflow design across multiple projects.</li>
+          </ul>
         </div>
       </section>
 
